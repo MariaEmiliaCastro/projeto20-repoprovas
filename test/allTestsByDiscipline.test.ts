@@ -4,7 +4,7 @@ import { prisma } from "../src/config/database";
 
 const request = supertest(app);
 
-describe("Tests Route POST /all-tests-teacher", () => {
+describe("Tests Route POST /all-tests-discipline", () => {
 
     it("should return 401 in case the user is not authenticated", async () => {
 

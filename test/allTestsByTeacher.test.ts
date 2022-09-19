@@ -1,7 +1,12 @@
 import supertest from "supertest";
 import app from "../src/index";
+import { prisma } from "../src/config/database";
 
 const request = supertest(app);
+
+beforeEach(async () => {
+     await prisma.$executeRaw`TRUNCATE TABLE "User"`;
+});
 
 describe("Tests Route POST /all-tests-teacher", () => {
 
@@ -20,6 +25,7 @@ describe("Tests Route POST /all-tests-teacher", () => {
       
         await request.post("/sign-up").send(userData);
         const responseLogin = await request.post("/login").send(userData);
+        console.log(responseLogin.body);
         const response = await request.get("/all-tests-teacher").set({Authorization: responseLogin.body.token});
         expect(response.status).toBe(200);
     });

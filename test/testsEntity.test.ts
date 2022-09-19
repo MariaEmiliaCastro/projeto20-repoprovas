@@ -12,6 +12,21 @@ const testData = {
   teacher: "Diego Pinho"
 }
 
+beforeEach(async () => {
+  // do something before each test
+  await prisma.$executeRaw`TRUNCATE TABLE "Tests"`;
+  await prisma.$executeRaw`TRUNCATE TABLE "User"`;
+  // await prisma.$executeRaw`TRUNCATE TABLE "Terms" CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Teachers" CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Categories" CASCADE`;
+
+  // await prisma.$executeRaw`INSERT INTO "Terms" ("number") VALUES (1)`;
+  await prisma.$executeRaw`INSERT INTO "Teachers" ("name") VALUES ('Diego Pinho')`;
+  await prisma.$executeRaw`INSERT INTO "Categories" ("name") VALUES ('Projeto')`;
+
+
+});
+
 describe("Test POST /save-test route", () => {
 
   it("should return 401 in case the user is not authenticated", async () => {
@@ -31,7 +46,7 @@ describe("Test POST /save-test route", () => {
     const responseLogin = await request.post("/login").send(userData);
     const response = await request.post("/save-test").set({Authorization: responseLogin.body.token}).send(testData);
     console.log(response.body);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
   });
 });
 
