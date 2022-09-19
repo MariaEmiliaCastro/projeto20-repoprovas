@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import app from "../src/index";
+import { prisma } from "../src/config/database";
 
 const request = supertest(app);
 
@@ -24,3 +25,8 @@ describe("Tests Route POST /all-tests-teacher", () => {
         expect(response.status).toBe(200);
     });
 });
+
+afterAll(async () => {
+    // do something after all tests
+    await prisma.$disconnect();
+  });

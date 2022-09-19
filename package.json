@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node dist/server.js",
+    "build": "tsc",
+    "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
     "test": "cross-env dotenv -e .env.test prisma migrate dev -n reset && prisma db seed && dotenv -e .env.test jest --no-cache"
   },
