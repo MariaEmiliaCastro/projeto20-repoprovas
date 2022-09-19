@@ -2,9 +2,9 @@
   "name": "projeto19-drivenpass",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "test": "cross-env dotenv -e .env.test prisma migrate dev -n reset && prisma db seed && dotenv -e .env.test jest --no-cache"
   },
