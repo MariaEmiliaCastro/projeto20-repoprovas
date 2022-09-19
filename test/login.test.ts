@@ -26,6 +26,18 @@ describe("Tests Route POST /login", () => {
     expect(response.status).toBe(401);
   });
 
+  it("should return 409 for a duplicated user", async () => {
+    const userData = {
+      email : "miley.cyrus@email.com",
+      password : "HannahMontana"
+    }
+
+    await request.post("/sign-up").send(userData);
+    const response = await request.post("/sign-up").send(userData);
+
+    expect(response.status).toBe(409);
+  });
+
   it("should return 200 in case the user exists", async () => {
     const data = await request.post("/sign-up").send(userData);
     const response = await request.post("/login").send(userData);
