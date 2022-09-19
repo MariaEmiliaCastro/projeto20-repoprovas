@@ -37,10 +37,10 @@ const UserService = {
     
                 return token;
             }
-            throw { type: "not_found", message: "wrong data!" };
+            throw { type: "unauthorized", message: "wrong data!" };
         }
 
-        throw { type: "not_found", message: "user data not found!" };
+        throw { type: "unauthorized", message: "user data not found!" };
     }
 };
 

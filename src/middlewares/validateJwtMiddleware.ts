@@ -9,7 +9,7 @@ const validateJWT = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers['authorization'];
 
     if(!token){
-        throw { code: 'unauthorized', message: 'no token sent!'};
+        throw { type: 'unauthorized', message: 'no token sent!'};
     }
 
     const SECRET: string = process.env.JWT_SECRET ?? ' ';
@@ -22,7 +22,7 @@ const validateJWT = (req: Request, res: Response, next: NextFunction) => {
         next();
     } catch (error) {
         console.log(error)
-        res.sendStatus(409);
+        res.sendStatus(401);
     }
 
 };
